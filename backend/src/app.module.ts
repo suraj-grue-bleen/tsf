@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Sequelize } from 'sequelize-typescript';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { MODELS } from 'src/models';
 import { AppRoutingModule } from './app-routing.module';
 import { MailerModule } from '@nestjs-modules/mailer';
@@ -15,7 +14,8 @@ let _NODEENV = _ENV['NODE_ENV'];
 /**Sequelize connection */
 let CONNECTION: any = {
   ...db_config[_NODEENV],
-  models: MODELS,
+  entities: MODELS,
+  synchronize: true, // Set to false in production
   logging: false,
 
   dialectOptions: {
@@ -28,6 +28,7 @@ let CONNECTION: any = {
       return next();
     },
   },
+
   pool: {
     handleDisconnects: true,
     max: 10000,
@@ -35,6 +36,7 @@ let CONNECTION: any = {
     acquire: 200000,
   },
   timezone: '+05:30',
+  
 };
 
 let MAIL_CONFIG = [
@@ -56,12 +58,12 @@ let MULTER_CONFIG = [
   }),
 ];
 
-let MODULES = [SequelizeModule.forRoot(CONNECTION), AppRoutingModule];
+let MODULES = [TypeOrmModule.forRoot(CONNECTION), AppRoutingModule];
 MODULES = [...MODULES, ...MAIL_CONFIG, ...MULTER_CONFIG];
 
 @Module({
   imports: MODULES,
   controllers: [AppController],
-  providers: [AppService, { provide: 'SEQUELIZE', useExisting: Sequelize }],
+  providers: [AppService],
 })
 export class AppModule {}

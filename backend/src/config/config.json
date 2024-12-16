@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "tsf_dev",
+    "port" : 5432,
+    "host": "localhost"
+    
+  },
+  "dev_local": {
+    "type": "postgres",
+    "host": "localhost",
+    "port" : 5432,
+    "username": "postgres",
+    "password": "admin",
+    "database": "tsf_local"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "port" : 5432,
+    "host": "127.0.0.1"
+  }
+}
