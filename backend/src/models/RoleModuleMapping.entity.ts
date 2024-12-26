@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './User.entity';
+import { ModuleMaster } from './ModuleMaster.entity';
 
 @Entity()
 export class RoleModule {
@@ -27,6 +29,14 @@ export class RoleModule {
   created_at: Date;
 
   @Column({ type:'time'})
-  updated_at: Date
+  updated_at: Date;
+
+  // Many role-module mappings can belong to one user
+  @ManyToOne(() => User, (user) => user.roleModules)
+  user: User;
+
+  // Many role-module mappings can belong to one module
+  @ManyToOne(() => ModuleMaster, { nullable: false })
+  module: ModuleMaster;
 
 }

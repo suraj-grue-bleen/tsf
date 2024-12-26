@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './User.entity';
 @Entity()
 export class AuditLogs {
-  /**
-   * this decorator will help to auto generate id for the table.
-   */
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,6 +22,9 @@ export class AuditLogs {
   method: string;
 
   @Column({ type:'time'})
-  created_at: Date
+  created_at: Date;
+
+  @ManyToOne(() => User, (user) => user.auditLogs, { onDelete: 'CASCADE' })
+  user: User;
 
 }

@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './User.entity';
 
 @Entity()
-export class User {
-  /**
-   * this decorator will help to auto generate id for the table.
-   */
+export class Role {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,4 +15,7 @@ export class User {
   @Column({ type: 'boolean', default: true })
   status: boolean;
 
+  @OneToMany(() => User, (user) => user.role)
+  users: User[];
+  
 }

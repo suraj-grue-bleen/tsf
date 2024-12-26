@@ -1,10 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne,JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './User.entity';
 
 @Entity()
 export class Otp {
-  /**
-   * this decorator will help to auto generate id for the table.
-   */
+  
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,4 +30,8 @@ export class Otp {
 
   @Column({ type: 'varchar' })
   created_at: string;
+
+  @OneToOne(() => User, (user) => user.otp)
+  @JoinColumn({ name: 'user_id' }) // Foreign key column for the relation
+  user: User;
 }
