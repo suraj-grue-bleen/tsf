@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Department {
   /**
    * this decorator will help to auto generate id for the table.
    */
@@ -9,7 +9,7 @@ export class User {
   id: number;
 
   @Column({ type: 'varchar', length: 50 })
-  program_name: string;
+  department_name: string;
 
   @Column({ type: 'varchar', length: 150 })
   description: string;

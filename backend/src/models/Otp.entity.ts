@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Otp {
   /**
    * this decorator will help to auto generate id for the table.
    */
@@ -12,7 +12,7 @@ export class User {
   email_id: string;
 
   @Column({ type: 'int', length: 40 })
-  user_id: string;
+  user_id: number;
 
   @Column({ type: 'varchar', length: 15 })
   otp: string;
@@ -23,11 +23,11 @@ export class User {
   @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @Column({ type: 'varchar' })
-  last_seen_at: string;
+  @Column({ type: 'time' })
+  last_seen_at: Date;
 
-  @Column({ type: 'varchar' })
-  expiry_at: string;
+  @Column({ type: 'time' })
+  expiry_at: Date;
 
   @Column({ type: 'varchar' })
   created_at: string;

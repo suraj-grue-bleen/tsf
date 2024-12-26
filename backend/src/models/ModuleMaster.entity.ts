@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class ModuleMaster {
   /**
    * this decorator will help to auto generate id for the table.
    */
@@ -15,15 +15,14 @@ export class User {
   module_link: string;
 
   @Column({ type: 'int'})
-  parent_id: string;
+  parent_id: number;
 
   @Column({ type: 'int' })
   type: number;
 
   @Column({ type: 'float' })
-  menu_order: string;
+  menu_order: number;
 
   @Column({ type:'time'})
   created_at: Date
-
 }
