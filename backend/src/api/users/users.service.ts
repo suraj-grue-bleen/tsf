@@ -12,13 +12,21 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private readonly responseService: ResponseServices,
-    //  private readonly userRepository: Repository<User>
+    //private readonly responseService: ResponseServices,
+    private readonly userRepository: Repository<User>
   ) { }
   /**
    * @param req
    * @param res
+   *//**
+   * Fetch all users.
+   * @returns {Promise<User[]>}
    */
+  async getUsers(): Promise<User[]> {
+    return await this.userRepository.find({
+      relations: ['department', 'role'], // Include related entities if needed
+    });
+  }
   
   
   

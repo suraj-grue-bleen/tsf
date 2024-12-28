@@ -10,19 +10,19 @@ export class RoleModule {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'int', length: 7 })
+  @Column({ type: 'int' })
   module_id: number;
 
-  @Column({ type: 'int', length: 7 })
+  @Column({ type: 'int'})
   role_id: number;
 
-  @Column({ type: 'int', length: 7 })
+  @Column({ type: 'int' })
   user_id: number;
 
-  @Column({ type: 'int', length: 7 })
+  @Column({ type: 'int' })
   created_by: number;
   
-  @Column({ type: 'int', length: 7 })
+  @Column({ type: 'int'})
   updated_by: number;
 
   @Column({ type:'time'})

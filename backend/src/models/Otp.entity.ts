@@ -10,7 +10,7 @@ export class Otp {
   @Column({ type: 'varchar', length: 60 })
   email_id: string;
 
-  @Column({ type: 'int', length: 40 })
+  @Column({ type: 'int' })
   user_id: number;
 
   @Column({ type: 'varchar', length: 15 })

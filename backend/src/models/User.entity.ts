@@ -29,28 +29,29 @@ export class User {
   // @ManyToOne(() => Role, (role) => role.users)
   // @JoinColumn({ name: 'role_id' })
   // role: Role;
-  @Column({ type: 'int', width: 3 })
+
+  @Column({ type: 'int' })
   department_id: number;
 
-  @Column({ type: 'int', width: 12 })
+  @Column({ type: 'int' })
   role_id: number;
 
-  @Column({ type: 'int', width: 2 })
+  @Column({ type: 'int' })
   state_id: number;
 
-  @Column({ type: 'int', width: 10 })
+  @Column({ type: 'int' })
   district_id: number;
 
-  @Column({ type: 'int', width: 12 })
+  @Column({ type: 'int' })
   block_id: number;
 
-  @Column({ type: 'int', width: 12 })
+  @Column({ type: 'int' })
   panchayat_id: number;
 
-  @Column({ type: 'int', width: 12 })
+  @Column({ type: 'int' })
   village_id: number;
 
-  @Column({ type: 'int', width: 12 })
+  @Column({ type: 'int' })
   unit_id: number;
 
   @Column({ type: 'varchar', length: 255 })
@@ -82,7 +83,7 @@ export class User {
   @OneToMany(() => AuditLogs, (auditLogs) => auditLogs.user)
   auditLogs: AuditLogs[];
 
-   // One user can have multiple role-module mappings
+   //One user can have multiple role-module mappings
    @OneToMany(() => RoleModule, (roleModule) => roleModule.user)
    roleModules: RoleModule[];
 }

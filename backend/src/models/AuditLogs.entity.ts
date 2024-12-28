@@ -6,10 +6,10 @@ export class AuditLogs {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'int', length: 7 })
+  @Column({ type: 'int' })
   user_id: number;
 
-  @Column({ type: 'json', length: 255 })
+  @Column({ type: 'json' })
   req: string;
 
   @Column({ type: 'json'})
