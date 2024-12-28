@@ -12,8 +12,8 @@ let CONNECTION: any = {
   entities: MODELS,
   migrationsRun: false,
   migrations: ['dist/src/**/migrations/*.js'],
-  migrationsTableName: 'migrations',
-  synchronize: true, // Set to false in production
+  migrationsTableName: 'migrationHistory',
+  synchronize: false, // Set to false in production
   logging: false,
 
   dialectOptions: {
