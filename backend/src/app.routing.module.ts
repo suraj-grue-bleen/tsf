@@ -5,7 +5,7 @@ import { AuthModule } from './modules/auth/auth.module';
 
 export const ROUTES = [
   {
-    path: 'api/',
+    path: 'api/v1/',
     children: [
       {
         path: 'user',

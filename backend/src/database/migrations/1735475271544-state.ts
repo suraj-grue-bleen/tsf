@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class Program1735328798571 implements MigrationInterface {
+export class State1735475271544 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_department_masters',
+        name: 'tbl_state_masters',
         columns: [
           {
             name: 'id',
@@ -14,15 +14,10 @@ export class Program1735328798571 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'dept_name',
+            name: 'state_name',
             type: 'varchar',
             length: '50',
             isNullable: false,
-          },
-          {
-            name: 'description',
-            type: 'text',
-            isNullable: true,
           },
           {
             name: 'created_at',
@@ -45,9 +40,5 @@ export class Program1735328798571 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`
-      DROP TABLE "tbl_department_masters";
-    `);
-  }
+  public async down(queryRunner: QueryRunner): Promise<void> {}
 }
