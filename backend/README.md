@@ -45,17 +45,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Run tests
+## Migrations
 
 ```bash
-# unit tests
-$ npm run test
+# create migration file
+$ npm run migration:create --name=file-name
 
-# e2e tests
-$ npm run test:e2e
+# run migration
+$ npm run migration:run
 
-# test coverage
-$ npm run test:cov
+# revert migration
+$ npm run migration:revert
 ```
 
 ## Deployment

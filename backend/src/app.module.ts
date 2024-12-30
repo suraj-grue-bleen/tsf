@@ -10,11 +10,7 @@ import { AppRoutingModule } from './app.routing.module';
 let CONNECTION: any = {
   ...AppDataSource.options,
   entities: MODELS,
-  migrationsRun: false,
-  migrations: ['dist/src/**/migrations/*.js'],
-  migrationsTableName: 'migrationHistory',
   synchronize: false, // Set to false in production
-  logging: false,
 
   dialectOptions: {
     // useUTC: false,

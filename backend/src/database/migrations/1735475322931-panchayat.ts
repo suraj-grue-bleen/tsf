@@ -1,10 +1,10 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 
-export class Program1735328798571 implements MigrationInterface {
+export class Panchayat1735475322931 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_department_masters',
+        name: 'tbl_panchayat_masters',
         columns: [
           {
             name: 'id',
@@ -14,15 +14,15 @@ export class Program1735328798571 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'dept_name',
+            name: 'panchayat_name',
             type: 'varchar',
-            length: '50',
+            length: '100',
             isNullable: false,
           },
           {
-            name: 'description',
-            type: 'text',
-            isNullable: true,
+            name: 'block_id',
+            type: 'int',
+            isNullable: false,
           },
           {
             name: 'created_at',
@@ -43,11 +43,17 @@ export class Program1735328798571 implements MigrationInterface {
         ],
       }),
     );
+
+    await queryRunner.createForeignKey(
+      'tbl_panchayat_masters',
+      new TableForeignKey({
+        columnNames: ['block_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_block_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`
-      DROP TABLE "tbl_department_masters";
-    `);
-  }
+  public async down(queryRunner: QueryRunner): Promise<void> {}
 }
