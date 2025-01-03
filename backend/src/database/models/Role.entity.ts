@@ -1,20 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from 'src/utility/Base.entity';
 
-@Entity()
-export class Role {
-  /**
-   * this decorator will help to auto generate id for the table.
-   */
-  @PrimaryGeneratedColumn()
-  id: number;
-
+@Entity('tbl_role_masters')
+export class Role extends BaseEntity {
   @Column({ type: 'varchar', length: 50 })
   name: string;
 
   @Column({ type: 'varchar', length: 25 })
   display_name: string;
-
-  @Column({ type: 'boolean', default: true })
-  status: boolean;
-
 }

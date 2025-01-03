@@ -1,12 +1,8 @@
+import { BaseEntity } from 'src/utility/Base.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class ModuleMaster {
-  /**
-   * this decorator will help to auto generate id for the table.
-   */
-  @PrimaryGeneratedColumn()
-  id: number;
+export class ModuleMaster extends BaseEntity {
 
   @Column({ type: 'varchar', length: 60 })
   menu_name: string;
@@ -14,16 +10,20 @@ export class ModuleMaster {
   @Column({ type: 'varchar', length: 50 })
   module_link: string;
 
-  @Column({ type: 'int'})
+  @Column()
   parent_id: string;
 
-  @Column({ type: 'int' })
+  //Comment Sub-Menu,
+  @Column()
   type: number;
 
   @Column({ type: 'float' })
   menu_order: string;
 
-  @Column({ type:'time'})
-  created_at: Date
+  @Column()
+  created_by: number;
+
+  @Column()
+  updated_by: number;
 
 }

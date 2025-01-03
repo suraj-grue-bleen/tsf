@@ -8,13 +8,13 @@ export class Role1735328889939 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'int',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'uuid',
+            generationStrategy: 'increment',
           },
           {
-            name: 'name',
+            name: 'role_name',
             type: 'varchar',
             length: '50',
             isNullable: false,
@@ -27,12 +27,6 @@ export class Role1735328889939 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'status',
-            type: 'boolean',
-            isNullable: false,
-            default: true,
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
@@ -43,10 +37,19 @@ export class Role1735328889939 implements MigrationInterface {
             default: 'CURRENT_TIMESTAMP',
             onUpdate: 'CURRENT_TIMESTAMP',
           },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+          },
         ],
       }),
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`
+      DROP TABLE "tbl_role_masters";
+    `);
+  }
 }
