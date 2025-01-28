@@ -1,22 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { MODELS } from 'src/database/models'; 
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { MODELS } from 'src/models';
-import { AppRoutingModule } from './app-routing.module';
-import { MailerModule } from '@nestjs-modules/mailer';
-import { config } from 'dotenv';
-import db_config from './config/config.json';
+import { AppDataSource } from 'ormconfig';
 import { MulterModule } from '@nestjs/platform-express';
-let _ENV = config().parsed;
-let _NODEENV = _ENV['NODE_ENV'];
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppRoutingModule } from './app.routing.module';
 
-/**Sequelize connection */
 let CONNECTION: any = {
-  ...db_config[_NODEENV],
+  ...AppDataSource.options,
   entities: MODELS,
-  synchronize: true, // Set to false in production
-  logging: false,
+  synchronize: false, // Set to false in production
 
   dialectOptions: {
     // useUTC: false,
@@ -36,21 +30,7 @@ let CONNECTION: any = {
     acquire: 200000,
   },
   timezone: '+05:30',
-  
 };
-
-let MAIL_CONFIG = [
-  MailerModule.forRoot({
-    transport: {
-      host: 'smtp.mailtrap.io',
-      port: 2525,
-      auth: {
-        user: '6a2a3deb28c9a0',
-        pass: '05e3aafa86253e',
-      },
-    },
-  }),
-];
 
 let MULTER_CONFIG = [
   MulterModule.register({
@@ -58,8 +38,7 @@ let MULTER_CONFIG = [
   }),
 ];
 
-let MODULES = [TypeOrmModule.forRoot(CONNECTION), AppRoutingModule];
-MODULES = [...MODULES, ...MAIL_CONFIG, ...MULTER_CONFIG];
+let MODULES = [TypeOrmModule.forRoot(CONNECTION), ...MULTER_CONFIG, AppRoutingModule];
 
 @Module({
   imports: MODULES,
