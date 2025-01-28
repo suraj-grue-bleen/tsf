@@ -30,10 +30,23 @@ export class UsersController {
    * @param res
    */
   
-  // @Get('get-user-list/:id?')
-  // async findAllUsers(@Req() req: Request, @Res() res: Response): Promise<User[]> {
-  //   return this.usersService.getUsers();
-  // }
+  @Get('get-user-list/:id?')
+  async findAllUsers(@Req() req: Request, @Res() res: Response): Promise<Response> {
+    try {
+      const users: User[] = await this.usersService.getUsers();
+      return res.status(200).json({
+        success: true,
+        message: 'User list fetched successfully',
+        data: users,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Error fetching user list',
+        error: error.message,
+      });
+    }
+  }
 
 
   

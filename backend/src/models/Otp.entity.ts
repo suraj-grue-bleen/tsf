@@ -1,18 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne,JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './User.entity';
 
 @Entity()
-export class User {
-  /**
-   * this decorator will help to auto generate id for the table.
-   */
+export class Otp {
+  
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 60 })
   email_id: string;
 
-  @Column({ type: 'int', length: 40 })
-  user_id: string;
+  @Column({ type: 'int' })
+  user_id: number;
 
   @Column({ type: 'varchar', length: 15 })
   otp: string;
@@ -23,12 +22,16 @@ export class User {
   @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @Column({ type: 'varchar' })
-  last_seen_at: string;
+  @Column({ type: 'time' })
+  last_seen_at: Date;
 
-  @Column({ type: 'varchar' })
-  expiry_at: string;
+  @Column({ type: 'time' })
+  expiry_at: Date;
 
   @Column({ type: 'varchar' })
   created_at: string;
+
+  @OneToOne(() => User, (user) => user.otp)
+  @JoinColumn({ name: 'user_id' }) // Foreign key column for the relation
+  user: User;
 }

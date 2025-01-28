@@ -1,21 +1,22 @@
+
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './User.entity';
 
 @Entity()
-export class Role {
+export class Department {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 50 })
-  name: string;
+  department_name: string;
 
-  @Column({ type: 'varchar', length: 25 })
-  display_name: string;
+  @Column({ type: 'varchar', length: 150 })
+  description: string;
 
   @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @OneToMany(() => User, (user) => user.role)
+  @OneToMany(() => User, (user) => user.department)
   users: User[];
   
 }
