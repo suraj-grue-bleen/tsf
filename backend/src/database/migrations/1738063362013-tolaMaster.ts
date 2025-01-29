@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class Village1735480211161 implements MigrationInterface {
+export class TolaMaster1738063362013 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_village_masters',
+        name: 'tbl_tola_masters',
         columns: [
           {
             name: 'id',
@@ -21,30 +21,35 @@ export class Village1735480211161 implements MigrationInterface {
           {
             name: 'state_id',
             type: 'int',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'district_id',
             type: 'int',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'block_id',
             type: 'int',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'unit_id',
             type: 'int',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'panchayat_id',
             type: 'int',
-            isNullable: true,
+            isNullable: false,
           },
           {
-            name: 'village_name',
+            name: 'village_id',
+            type: 'int',
+            isNullable: false,
+          },
+          {
+            name: 'tola_name',
             type: 'varchar',
             length: '50',
             isNullable: false,
@@ -71,7 +76,7 @@ export class Village1735480211161 implements MigrationInterface {
 
     //state
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_tola_masters',
       new TableForeignKey({
         columnNames: ['state_id'],
         referencedColumnNames: ['id'],
@@ -81,7 +86,7 @@ export class Village1735480211161 implements MigrationInterface {
     );
     //district
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_tola_masters',
       new TableForeignKey({
         columnNames: ['district_id'],
         referencedColumnNames: ['id'],
@@ -91,7 +96,7 @@ export class Village1735480211161 implements MigrationInterface {
     );
     //block
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_tola_masters',
       new TableForeignKey({
         columnNames: ['block_id'],
         referencedColumnNames: ['id'],
@@ -101,7 +106,7 @@ export class Village1735480211161 implements MigrationInterface {
     );
     //unit
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_tola_masters',
       new TableForeignKey({
         columnNames: ['unit_id'],
         referencedColumnNames: ['id'],
@@ -110,8 +115,9 @@ export class Village1735480211161 implements MigrationInterface {
       }),
     );
 
+    //panchayat
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_tola_masters',
       new TableForeignKey({
         columnNames: ['panchayat_id'],
         referencedColumnNames: ['id'],
@@ -119,9 +125,20 @@ export class Village1735480211161 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
+    //village
+    await queryRunner.createForeignKey(
+      'tbl_tola_masters',
+      new TableForeignKey({
+        columnNames: ['village_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_village_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
+
     //User (created_by)
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_tola_masters',
       new TableForeignKey({
         columnNames: ['created_by'],
         referencedColumnNames: ['id'],
@@ -132,7 +149,7 @@ export class Village1735480211161 implements MigrationInterface {
 
     //User (updated_by)
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_tola_masters',
       new TableForeignKey({
         columnNames: ['updated_by'],
         referencedColumnNames: ['id'],

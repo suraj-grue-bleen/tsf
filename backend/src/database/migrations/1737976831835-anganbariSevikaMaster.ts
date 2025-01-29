@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class Village1735480211161 implements MigrationInterface {
+export class AnganbariSevikaMaster1737976831835 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_village_masters',
+        name: 'tbl_anganbari_sevika_masters',
         columns: [
           {
             name: 'id',
@@ -17,6 +17,42 @@ export class Village1735480211161 implements MigrationInterface {
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'increment',
+          },
+          {
+            name: 'anganbari_name',
+            type: 'varchar',
+            length: '100',
+            isNullable: false,
+          },
+          {
+            name: 'anganbari_code',
+            type: 'varchar',
+            length: '100',
+            isNullable: false,
+          },
+          {
+            name: 'sevika_name',
+            type: 'varchar',
+            length: '100',
+            isNullable: false,
+          },
+          {
+            name: 'sevika_phone_number',
+            type: 'varchar',
+            length: '100',
+            isNullable: false,
+          },
+          {
+            name: 'achivement_count',
+            type: 'varchar',
+            length: '100',
+            isNullable: false,
+          },
+          {
+            name: 'session',
+            type: 'varchar',
+            length: '100',
+            isNullable: false,
           },
           {
             name: 'state_id',
@@ -44,10 +80,31 @@ export class Village1735480211161 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'village_name',
-            type: 'varchar',
-            length: '50',
-            isNullable: false,
+            name: 'village_id',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'tola_id',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'status',
+            type: 'enum',
+            enum: ['1', '2'],
+            enumName: 'status_enum',
+            isNullable: true,
+          },
+          {
+            name: 'created_by',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'updated_by',
+            type: 'int',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -69,9 +126,9 @@ export class Village1735480211161 implements MigrationInterface {
       }),
     );
 
-    //state
+    // State
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_anganbari_sevika_masters',
       new TableForeignKey({
         columnNames: ['state_id'],
         referencedColumnNames: ['id'],
@@ -79,9 +136,10 @@ export class Village1735480211161 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
-    //district
+
+    //District
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_anganbari_sevika_masters',
       new TableForeignKey({
         columnNames: ['district_id'],
         referencedColumnNames: ['id'],
@@ -89,9 +147,10 @@ export class Village1735480211161 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
-    //block
+
+    //Block
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_anganbari_sevika_masters',
       new TableForeignKey({
         columnNames: ['block_id'],
         referencedColumnNames: ['id'],
@@ -99,19 +158,21 @@ export class Village1735480211161 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
-    //unit
+
+    //Unit
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_anganbari_sevika_masters',
       new TableForeignKey({
         columnNames: ['unit_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_unit_masters',
+        referencedTableName: 'tbl_block_unit_masters',
         onDelete: 'CASCADE',
       }),
     );
 
+    //Panchayat
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_anganbari_sevika_masters',
       new TableForeignKey({
         columnNames: ['panchayat_id'],
         referencedColumnNames: ['id'],
@@ -119,9 +180,32 @@ export class Village1735480211161 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
+
+    //Village
+    await queryRunner.createForeignKey(
+      'tbl_anganbari_sevika_masters',
+      new TableForeignKey({
+        columnNames: ['village_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_village_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
+
+    //tola
+    await queryRunner.createForeignKey(
+      'tbl_anganbari_sevika_masters',
+      new TableForeignKey({
+        columnNames: ['tola_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_village_tola_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
+
     //User (created_by)
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_anganbari_sevika_masters',
       new TableForeignKey({
         columnNames: ['created_by'],
         referencedColumnNames: ['id'],
@@ -132,7 +216,7 @@ export class Village1735480211161 implements MigrationInterface {
 
     //User (updated_by)
     await queryRunner.createForeignKey(
-      'tbl_village_masters',
+      'tbl_anganbari_sevika_masters',
       new TableForeignKey({
         columnNames: ['updated_by'],
         referencedColumnNames: ['id'],

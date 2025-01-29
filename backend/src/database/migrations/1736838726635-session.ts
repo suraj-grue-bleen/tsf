@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class District1735475291611 implements MigrationInterface {
+export class Session1736838726635 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_district_masters',
+        name: 'tbl_session_masters',
         columns: [
           {
             name: 'id',
@@ -19,15 +19,31 @@ export class District1735475291611 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'state_id',
-            type: 'int',
+            name: 'from_date',
+            type: 'date',
             isNullable: false,
           },
           {
-            name: 'district_name',
-            type: 'varchar',
-            length: '100',
+            name: 'to_date',
+            type: 'date',
             isNullable: false,
+          },
+          {
+            name: 'status',
+            type: 'enum',
+            enum: ['1', '2'],
+            enumName: 'status_enum',
+            isNullable: true,
+          },
+          {
+            name: 'created_by',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'updated_by',
+            type: 'int',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -49,19 +65,9 @@ export class District1735475291611 implements MigrationInterface {
       }),
     );
 
-    await queryRunner.createForeignKey(
-      'tbl_district_masters',
-      new TableForeignKey({
-        columnNames: ['state_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_state_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
-
     //User (created_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_session_masters',
       new TableForeignKey({
         columnNames: ['created_by'],
         referencedColumnNames: ['id'],
@@ -72,7 +78,7 @@ export class District1735475291611 implements MigrationInterface {
 
     //User (updated_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_session_masters',
       new TableForeignKey({
         columnNames: ['updated_by'],
         referencedColumnNames: ['id'],
@@ -82,5 +88,9 @@ export class District1735475291611 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`
+        DROP TABLE "tbl_session_masters";
+    `);
+  }
 }

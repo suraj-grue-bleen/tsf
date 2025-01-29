@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class District1735475291611 implements MigrationInterface {
+export class AgeMaster1737975042014 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_district_masters',
+        name: 'tbl_age_masters',
         columns: [
           {
             name: 'id',
@@ -19,15 +19,29 @@ export class District1735475291611 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'state_id',
+            name: 'screening_cat_id',
             type: 'int',
             isNullable: false,
           },
           {
-            name: 'district_name',
-            type: 'varchar',
-            length: '100',
-            isNullable: false,
+            name: 'from',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'to',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'created_by',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'updated_by',
+            type: 'int',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -49,19 +63,20 @@ export class District1735475291611 implements MigrationInterface {
       }),
     );
 
+    // Module Master
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_age_masters',
       new TableForeignKey({
-        columnNames: ['state_id'],
+        columnNames: ['screening_cat_Id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_state_masters',
+        referencedTableName: 'tbl_screening_category',
         onDelete: 'CASCADE',
       }),
     );
 
     //User (created_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_age_masters',
       new TableForeignKey({
         columnNames: ['created_by'],
         referencedColumnNames: ['id'],
@@ -72,7 +87,7 @@ export class District1735475291611 implements MigrationInterface {
 
     //User (updated_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_age_masters',
       new TableForeignKey({
         columnNames: ['updated_by'],
         referencedColumnNames: ['id'],

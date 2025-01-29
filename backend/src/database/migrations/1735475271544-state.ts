@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class State1735475271544 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -36,6 +41,28 @@ export class State1735475271544 implements MigrationInterface {
             isNullable: true,
           },
         ],
+      }),
+    );
+
+    //User (created_by)
+    await queryRunner.createForeignKey(
+      'tbl_tola_masters',
+      new TableForeignKey({
+        columnNames: ['created_by'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_employee_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
+
+    //User (updated_by)
+    await queryRunner.createForeignKey(
+      'tbl_tola_masters',
+      new TableForeignKey({
+        columnNames: ['updated_by'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_employee_masters',
+        onDelete: 'CASCADE',
       }),
     );
   }

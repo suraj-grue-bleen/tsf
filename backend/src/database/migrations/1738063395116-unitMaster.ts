@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class District1735475291611 implements MigrationInterface {
+export class UnitMaster1738063395116 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_district_masters',
+        name: 'tbl_unit_masters',
         columns: [
           {
             name: 'id',
@@ -24,9 +24,19 @@ export class District1735475291611 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'district_name',
+            name: 'district_id',
+            type: 'int',
+            isNullable: false,
+          },
+          {
+            name: 'block_id',
+            type: 'int',
+            isNullable: false,
+          },
+          {
+            name: 'unit_name',
             type: 'varchar',
-            length: '100',
+            length: '50',
             isNullable: false,
           },
           {
@@ -49,8 +59,9 @@ export class District1735475291611 implements MigrationInterface {
       }),
     );
 
+    //state
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_unit_masters',
       new TableForeignKey({
         columnNames: ['state_id'],
         referencedColumnNames: ['id'],
@@ -58,10 +69,30 @@ export class District1735475291611 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
+    //district
+    await queryRunner.createForeignKey(
+      'tbl_unit_masters',
+      new TableForeignKey({
+        columnNames: ['district_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_district_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
+    //block
+    await queryRunner.createForeignKey(
+      'tbl_unit_masters',
+      new TableForeignKey({
+        columnNames: ['block_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_block_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
 
     //User (created_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_unit_masters',
       new TableForeignKey({
         columnNames: ['created_by'],
         referencedColumnNames: ['id'],
@@ -72,7 +103,7 @@ export class District1735475291611 implements MigrationInterface {
 
     //User (updated_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_unit_masters',
       new TableForeignKey({
         columnNames: ['updated_by'],
         referencedColumnNames: ['id'],

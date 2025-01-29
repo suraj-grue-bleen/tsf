@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class Role1735328889939 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -27,6 +32,16 @@ export class Role1735328889939 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'created_by',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'updated_by',
+            type: 'int',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
@@ -43,6 +58,28 @@ export class Role1735328889939 implements MigrationInterface {
             isNullable: true,
           },
         ],
+      }),
+    );
+
+    //User (created_by)
+    await queryRunner.createForeignKey(
+      'tbl_role_masters',
+      new TableForeignKey({
+        columnNames: ['created_by'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_employee_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
+
+    //User (updated_by)
+    await queryRunner.createForeignKey(
+      'tbl_role_masters',
+      new TableForeignKey({
+        columnNames: ['updated_by'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_employee_masters',
+        onDelete: 'CASCADE',
       }),
     );
   }

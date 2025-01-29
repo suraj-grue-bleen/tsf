@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class Program1735328798571 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -14,7 +19,7 @@ export class Program1735328798571 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'dept_name',
+            name: 'department_name',
             type: 'varchar',
             length: '50',
             isNullable: false,
@@ -22,6 +27,16 @@ export class Program1735328798571 implements MigrationInterface {
           {
             name: 'description',
             type: 'text',
+            isNullable: true,
+          },
+          {
+            name: 'created_by',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'updated_by',
+            type: 'int',
             isNullable: true,
           },
           {
@@ -41,6 +56,28 @@ export class Program1735328798571 implements MigrationInterface {
             isNullable: true,
           },
         ],
+      }),
+    );
+
+    //User (created_by)
+    await queryRunner.createForeignKey(
+      'tbl_department_masters',
+      new TableForeignKey({
+        columnNames: ['created_by'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_employee_masters',
+        onDelete: 'CASCADE',
+      }),
+    );
+
+    //User (updated_by)
+    await queryRunner.createForeignKey(
+      'tbl_department_masters',
+      new TableForeignKey({
+        columnNames: ['updated_by'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'tbl_employee_masters',
+        onDelete: 'CASCADE',
       }),
     );
   }

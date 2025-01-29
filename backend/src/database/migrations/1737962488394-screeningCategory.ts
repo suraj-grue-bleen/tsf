@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class District1735475291611 implements MigrationInterface {
+export class ScreeningCategory1737962488394 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tbl_district_masters',
+        name: 'tbl_screening_category',
         columns: [
           {
             name: 'id',
@@ -19,15 +19,20 @@ export class District1735475291611 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'state_id',
-            type: 'int',
-            isNullable: false,
-          },
-          {
-            name: 'district_name',
+            name: 'name',
             type: 'varchar',
             length: '100',
             isNullable: false,
+          },
+          {
+            name: 'created_by',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'updated_by',
+            type: 'int',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -49,19 +54,9 @@ export class District1735475291611 implements MigrationInterface {
       }),
     );
 
-    await queryRunner.createForeignKey(
-      'tbl_district_masters',
-      new TableForeignKey({
-        columnNames: ['state_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_state_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
-
     //User (created_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_screening_category',
       new TableForeignKey({
         columnNames: ['created_by'],
         referencedColumnNames: ['id'],
@@ -72,7 +67,7 @@ export class District1735475291611 implements MigrationInterface {
 
     //User (updated_by)
     await queryRunner.createForeignKey(
-      'tbl_district_masters',
+      'tbl_screening_category',
       new TableForeignKey({
         columnNames: ['updated_by'],
         referencedColumnNames: ['id'],
