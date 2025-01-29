@@ -9,7 +9,8 @@ import { Block } from './Block.entity';
 import { Panchayat } from './Panchayat.entity';
 import { Village } from './Village.entity';
 import { AuditLog } from './AuditLogs.entity';
-
+import { Employee } from './Employee.entity';
+import { Unit } from './Unit.entity';
 export const MODELS = {
   User,
   ModuleMaster,
@@ -21,5 +22,7 @@ export const MODELS = {
   Block,
   Panchayat,
   Village,
-  AuditLog
+  AuditLog,
+  Employee,
+  Unit,
 };

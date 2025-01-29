@@ -5,9 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { BaseEntity } from 'src/utility/Base.entity';
 
 @Entity('tbl_audit_logs')
-export class AuditLog {
+export class AuditLog extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -35,9 +36,5 @@ export class AuditLog {
   @Column('timestamp', { nullable: true })
   end_time: Date;
 
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
+ 
 }
