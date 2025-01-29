@@ -7,17 +7,17 @@ import {
 } from 'typeorm';
 import { BaseEntity } from 'src/utility/Base.entity';
 import { Employee } from './Employee.entity';
-@Entity('tbl_role_masters')
-export class Role extends BaseEntity {
+@Entity('tbl_session_masters')
+export class Session extends BaseEntity {
   
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 50 })
-  role_name: string;
+  @Column({ type: 'date'})
+  from_date: Date;
 
-  @Column({ type: 'varchar', length: 25 })
-  display_name: string;
+  @Column({ type: 'date'})
+  to_date: Date;
 
   @Column()
   created_by: number;

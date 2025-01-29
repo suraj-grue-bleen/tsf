@@ -8,16 +8,25 @@ import {
 import { BaseEntity } from 'src/utility/Base.entity';
 import { Employee } from './Employee.entity';
 @Entity('tbl_role_masters')
-export class Role extends BaseEntity {
+export class KpiMappingMaster extends BaseEntity {
   
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 50 })
-  role_name: string;
+  @Column({type: 'int'})
+  total_block: number;
 
-  @Column({ type: 'varchar', length: 25 })
-  display_name: string;
+  @Column({type: 'int'})
+  total_nutrition_garden: number;
+
+  @Column({type: 'int'})
+  total_area_covered: number;
+
+  @Column({type: 'int'})
+  total_anganbari_center: number;
+
+  @Column({type: 'int'})
+  total_under_5_child: number;
 
   @Column()
   created_by: number;

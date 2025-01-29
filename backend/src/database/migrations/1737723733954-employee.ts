@@ -19,7 +19,7 @@ export class AppUsers1737723733954 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'emp_id',
+            name: 'employee_code',
             type: 'varchar',
             length: '25',
             isUnique: true,
@@ -31,11 +31,11 @@ export class AppUsers1737723733954 implements MigrationInterface {
             length: '100',
             isNullable: false,
           },
-          {
-            name: 'email',
-            type: 'varchar',
-            length: '100',
-          },
+          // {
+          //   name: 'email',
+          //   type: 'varchar',
+          //   length: '100',
+          // },
           {
             name: 'password',
             type: 'varchar',
@@ -67,42 +67,41 @@ export class AppUsers1737723733954 implements MigrationInterface {
             type: 'varchar',
             length: '100',
           },
-
-          {
-            name: 'state_id',
-            type: 'int',
-            isNullable: true,
-          },
-          {
-            name: 'district_id',
-            type: 'int',
-            isNullable: true,
-          },
-          {
-            name: 'block_id',
-            type: 'int',
-            isNullable: true,
-          },
-          {
-            name: 'unit_id',
-            type: 'int',
-            isNullable: true,
-          },
-          {
-            name: 'panchayat_id',
-            type: 'int',
-            isNullable: true,
-          },
-          {
-            name: 'village_id',
-            type: 'int',
-            isNullable: true,
-          },
-          {
-            name: 'tola_id',
-            type: 'int',
-            isNullable: true,
-          },
+          // {
+          //   name: 'state_id',
+          //   type: 'int',
+          //   isNullable: true,
+          // },
+          // {
+          //   name: 'district_id',
+          //   type: 'int',
+          //   isNullable: true,
+          // },
+          // {
+          //   name: 'block_id',
+          //   type: 'int',
+          //   isNullable: true,
+          // },
+          // {
+          //   name: 'unit_id',
+          //   type: 'int',
+          //   isNullable: true,
+          // },
+          // {
+          //   name: 'panchayat_id',
+          //   type: 'int',
+          //   isNullable: true,
+          // },
+          // {
+          //   name: 'village_id',
+          //   type: 'int',
+          //   isNullable: true,
+          // },
+          // {
+          //   name: 'tola_id',
+          //   type: 'int',
+          //   isNullable: true,
+          // },
           {
             name: 'gender',
             type: 'enum',
@@ -174,82 +173,82 @@ export class AppUsers1737723733954 implements MigrationInterface {
       }),
     );
 
-    // State
-    await queryRunner.createForeignKey(
-      'tbl_employee_masters',
-      new TableForeignKey({
-        columnNames: ['state_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_state_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
+    // // State
+    // await queryRunner.createForeignKey(
+    //   'tbl_employee_masters',
+    //   new TableForeignKey({
+    //     columnNames: ['state_id'],
+    //     referencedColumnNames: ['id'],
+    //     referencedTableName: 'tbl_state_masters',
+    //     onDelete: 'CASCADE',
+    //   }),
+    // );
 
-    //District
-    await queryRunner.createForeignKey(
-      'tbl_employee_masters',
-      new TableForeignKey({
-        columnNames: ['district_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_district_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
+    // //District
+    // await queryRunner.createForeignKey(
+    //   'tbl_employee_masters',
+    //   new TableForeignKey({
+    //     columnNames: ['district_id'],
+    //     referencedColumnNames: ['id'],
+    //     referencedTableName: 'tbl_district_masters',
+    //     onDelete: 'CASCADE',
+    //   }),
+    // );
 
-    //Block
-    await queryRunner.createForeignKey(
-      'tbl_employee_masters',
-      new TableForeignKey({
-        columnNames: ['block_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_block_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
+    // //Block
+    // await queryRunner.createForeignKey(
+    //   'tbl_employee_masters',
+    //   new TableForeignKey({
+    //     columnNames: ['block_id'],
+    //     referencedColumnNames: ['id'],
+    //     referencedTableName: 'tbl_block_masters',
+    //     onDelete: 'CASCADE',
+    //   }),
+    // );
 
-    //Unit
-    await queryRunner.createForeignKey(
-      'tbl_employee_masters',
-      new TableForeignKey({
-        columnNames: ['unit_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_unit_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
+    // //Unit
+    // await queryRunner.createForeignKey(
+    //   'tbl_employee_masters',
+    //   new TableForeignKey({
+    //     columnNames: ['unit_id'],
+    //     referencedColumnNames: ['id'],
+    //     referencedTableName: 'tbl_unit_masters',
+    //     onDelete: 'CASCADE',
+    //   }),
+    // );
 
-    //Panchayat
-    await queryRunner.createForeignKey(
-      'tbl_employee_masters',
-      new TableForeignKey({
-        columnNames: ['panchayat_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_panchayat_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
+    // //Panchayat
+    // await queryRunner.createForeignKey(
+    //   'tbl_employee_masters',
+    //   new TableForeignKey({
+    //     columnNames: ['panchayat_id'],
+    //     referencedColumnNames: ['id'],
+    //     referencedTableName: 'tbl_panchayat_masters',
+    //     onDelete: 'CASCADE',
+    //   }),
+    // );
 
-    //Village
-    await queryRunner.createForeignKey(
-      'tbl_employee_masters',
-      new TableForeignKey({
-        columnNames: ['village_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_village_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
+    // //Village
+    // await queryRunner.createForeignKey(
+    //   'tbl_employee_masters',
+    //   new TableForeignKey({
+    //     columnNames: ['village_id'],
+    //     referencedColumnNames: ['id'],
+    //     referencedTableName: 'tbl_village_masters',
+    //     onDelete: 'CASCADE',
+    //   }),
+    // );
 
-    //tola
-    await queryRunner.createForeignKey(
-      'tbl_employee_masters',
-      new TableForeignKey({
-        columnNames: ['tola_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'tbl_tola_masters',
-        onDelete: 'CASCADE',
-      }),
-    );
+    // //tola
+    // await queryRunner.createForeignKey(
+    //   'tbl_employee_masters',
+    //   new TableForeignKey({
+    //     columnNames: ['tola_id'],
+    //     referencedColumnNames: ['id'],
+    //     referencedTableName: 'tbl_tola_masters',
+    //     onDelete: 'CASCADE',
+    //   }),
+    // );
 
     //User (created_by)
     await queryRunner.createForeignKey(

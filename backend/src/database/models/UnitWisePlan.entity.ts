@@ -8,16 +8,16 @@ import {
 import { BaseEntity } from 'src/utility/Base.entity';
 import { Employee } from './Employee.entity';
 @Entity('tbl_role_masters')
-export class Role extends BaseEntity {
+export class UnitWisePlan extends BaseEntity {
   
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 50 })
-  role_name: string;
+  name: string;
 
-  @Column({ type: 'varchar', length: 25 })
-  display_name: string;
+// @Column({ type: 'varchar', length: 25 })
+// display_name: string;
 
   @Column()
   created_by: number;
