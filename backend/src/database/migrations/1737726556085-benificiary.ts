@@ -79,8 +79,9 @@ export class Benificiary1737726556085 implements MigrationInterface {
           },
           {
             name: 'caste',
-            type: 'varchar',
-            length: '50',
+            type: 'enum',
+            enum: ['1', '2', '3'],
+            enumName: 'caste_enum',
             isNullable: true,
           },
           {
